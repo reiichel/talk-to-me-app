@@ -8,5 +8,16 @@
   },
   "loading": "טוען",
   "requiredFields": "שדה חובה",
-  "submit": "המשך"
+  "submit": "המשך",
+  "customers": {
+    "title": "לקוחות",
+    "new": "לקוח חדש",
+    "searchPlaceholder": "טקסט החיפוש שברצונך להזין",
+    "firstName": "שם פרטי",
+    "lastName": "שם משפחה",
+    "mobile": "נייד",
+    "city": "עיר",
+    "error": "אירעה שגיאה בעת טעינת הלקוחות",
+    "loading": "טוען לקוחות..."
+  }
 }

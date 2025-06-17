@@ -1,4 +1,3 @@
-import { useAuthInit } from './hooks/useAuth';
 import { useSelector } from 'react-redux';
 import type { RootState } from '@/store';
 import { Navigate, BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -7,7 +6,6 @@ import LoginPage from './pages/LoginPage';
 import CustomersPage from './pages/CustomersPage';
 
 function App() {
-  useAuthInit();
   const token = useSelector((state: RootState) => state.auth.token);
 
   return (
