@@ -1,11 +1,16 @@
-import type { Customer } from "@/models/customer";
+import {
+  ArrowDownWideNarrow,
+  ArrowUpWideNarrow,
+  Info,
+  CheckCircle,
+} from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { ArrowDownWideNarrow, ArrowUpWideNarrow } from "lucide-react";
+import type { Customer } from "@/models/customer";
 
 interface Props {
   customers: Customer[];
   sortField?: keyof Customer;
-  sortDirection?: 'asc' | 'desc';
+  sortDirection?: "asc" | "desc";
   onSort?: (field: keyof Customer) => void;
   currentPage?: number;
   onPageChange?: (page: number) => void;
@@ -20,61 +25,59 @@ export default function CustomerTable({
 }: Props) {
   const { t } = useTranslation();
 
-  const getHeaderClass = (field: keyof Customer) =>
-    sortField === field
-      ? "bg-[#0797FF] text-white rounded px-2 py-1"
-      : "text-white px-2 py-1";
+  const headers: { key: keyof Customer; label: string }[] = [
+    { key: "firstName", label: t("customers.firstName") },
+    { key: "lastName", label: t("customers.lastName") },
+    { key: "mobile", label: t("customers.mobile") },
+    { key: "city", label: t("customers.city") },
+    { key: "country", label: t("customers.country") },
+    { key: "email", label: t("customers.email") },
+  ];
 
-  const renderSortIcon = (field: keyof Customer) =>
-    sortField === field ? (
-      sortDirection === "asc" ? (
-        <ArrowUpWideNarrow size={16} />
-      ) : (
-        <ArrowDownWideNarrow size={16} />
-      )
-    ) : null;
+  const getHeaderClasses = (key: keyof Customer) =>
+    `px-4 py-3 text-sm text-right cursor-pointer select-none transition-all ${
+      sortField === key
+        ? "bg-[#0797FF] text-white rounded-full font-semibold"
+        : "text-white hover:text-blue-300"
+    }`;
+
+  const renderSortIcon = (key: keyof Customer) =>
+    sortField === key &&
+    (sortDirection === "asc" ? (
+      <ArrowUpWideNarrow size={16} className="inline ml-1" />
+    ) : (
+      <ArrowDownWideNarrow size={16} className="inline ml-1" />
+    ));
 
   return (
-    <div className="overflow-x-auto w-full">
-      <table className="min-w-[600px] w-full text-xs sm:text-sm text-right text-white">
+    <div className="overflow-x-auto w-full mt-6 rounded-xl shadow-inner bg-[#0F2C3F]">
+      <table className="w-full text-sm text-right text-white min-w-[900px]">
         <thead>
-          <tr className="bg-[#0F2C3F]">
-            <th
-              className={getHeaderClass("firstName")}
-              onClick={() => onSort?.("firstName")}
-            >
-              {t("customers.firstName")} {renderSortIcon("firstName")}
-            </th>
-            <th
-              className={getHeaderClass("lastName")}
-              onClick={() => onSort?.("lastName")}
-            >
-              {t("customers.lastName")} {renderSortIcon("lastName")}
-            </th>
-            <th
-              className={getHeaderClass("mobile")}
-              onClick={() => onSort?.("mobile")}
-            >
-              {t("customers.mobile")} {renderSortIcon("mobile")}
-            </th>
-            <th
-              className={getHeaderClass("city")}
-              onClick={() => onSort?.("city")}
-            >
-              {t("customers.city")} {renderSortIcon("city")}
-            </th>
+          <tr>
+            {headers.map(({ key, label }) => (
+              <th
+                key={key}
+                onClick={() => onSort?.(key)}
+                className={getHeaderClasses(key)}
+              >
+                {label}
+                {renderSortIcon(key)}
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>
           {customers.map((c) => (
             <tr
               key={c.id}
-              className="border-b border-[#1D3B5A] hover:bg-[#072243]"
+              className="border-t border-[#1D3B5A] hover:bg-[#072243] transition"
             >
-              <td className="px-2 py-2">{c.firstName}</td>
-              <td className="px-2 py-2">{c.lastName}</td>
-              <td className="px-2 py-2">{c.mobile}</td>
-              <td className="px-2 py-2">{c.city}</td>
+              <td className="px-4 py-3">{c.firstName}</td>
+              <td className="px-4 py-3">{c.lastName}</td>
+              <td className="px-4 py-3">{c.mobile}</td>
+              <td className="px-4 py-3">{c.city}</td>
+              <td className="px-4 py-3">{c.country}</td>
+              <td className="px-4 py-3">{c.email}</td>
             </tr>
           ))}
         </tbody>
