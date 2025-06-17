@@ -1,0 +1,12 @@
+{
+  "login": {
+    "title": "כניסה למערכת",
+    "username": "שם משתמש",
+    "usernameLabel": "שם המשתמש שלך",
+    "password": "סיסמה",
+    "passwordLabel": "סיסמה חייבת לכלול לפחות 6 תווים"
+  },
+  "loading": "טוען",
+  "requiredFields": "שדה חובה",
+  "submit": "המשך"
+}
