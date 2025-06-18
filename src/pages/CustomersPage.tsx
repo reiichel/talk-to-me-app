@@ -57,9 +57,9 @@ export default function CustomersPage() {
 
       <div className="flex-grow overflow-hidden">
         {isError ? (
-          <p className="text-red-500 p-4">שגיאה בטעינת לקוחות</p>
+          <p className="text-red-500 p-4">{t("customers.error")}</p>
         ) : isLoading ? (
-          <p className="text-white p-4">טוען נתונים...</p>
+          <p className="text-white p-4">{t("customers.loading")}</p>
         ) : (
           <CustomerTable
             customers={customers}
@@ -75,4 +75,3 @@ export default function CustomersPage() {
     </div>
   );
 }
-
