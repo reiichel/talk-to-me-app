@@ -1,5 +1,5 @@
-// ✅ CustomerTable.tsx – RTL פיקסל פרפקט
-import { ArrowDownWideNarrow, ArrowUpWideNarrow, Info, CheckCircle } from "lucide-react";
+// ✅ CustomerTable.tsx – גרסה סופית מעודכנת
+import { ArrowDownWideNarrow, ArrowUpWideNarrow } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import type { Customer } from "@/models/customer";
 
@@ -27,56 +27,61 @@ export default function CustomerTable({
     { key: "email", label: t("customers.email") },
   ];
 
-  const getHeaderClasses = (key: keyof Customer) =>
-    `px-4 py-3 text-sm text-right cursor-pointer select-none transition-all whitespace-nowrap ${
-      sortField === key
-        ? "bg-[#0797FF] text-white rounded-full font-semibold"
-        : "text-white hover:text-blue-300"
-    }`;
+  const getHeaderClasses = (key: keyof Customer) => {
+    const isSorted = sortField === key;
+    return `
+      px-4 py-3 text-sm text-right cursor-pointer select-none whitespace-nowrap transition-all rounded-[14px]
+      ${isSorted
+        ? "bg-[#0797FF] text-white font-semibold"
+        : "bg-[#0F2C3F] text-white/80 hover:text-white"}
+    `;
+  };
 
   const renderSortIcon = (key: keyof Customer) =>
     sortField === key &&
     (sortDirection === "asc" ? (
-      <ArrowUpWideNarrow size={16} className="inline ml-1" />
+      <ArrowUpWideNarrow size={16} />
     ) : (
-      <ArrowDownWideNarrow size={16} className="inline ml-1" />
+      <ArrowDownWideNarrow size={16} />
     ));
 
   return (
-    <div dir="rtl" className="overflow-x-auto w-full shadow-inner bg-[#0F2C3F]">
-      <table className="w-full text-sm text-right text-white min-w-[900px]">
-        <thead>
-          <tr>
-            {headers.map(({ key, label }) => (
-              <th
-                key={key}
-                onClick={() => onSort?.(key)}
-                className={getHeaderClasses(key)}
-              >
-                <div className="flex items-center justify-center gap-1">
-                  {label}
-                  {renderSortIcon(key)}
-                </div>
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {customers.map((c) => (
-            <tr
-              key={c.id}
-              className="border-t border-[#1D3B5A] hover:bg-[#072243] transition"
-            >
-              <td className="px-4 py-3">{c.firstName}</td>
-              <td className="px-4 py-3">{c.lastName}</td>
-              <td className="px-4 py-3">{c.mobile}</td>
-              <td className="px-4 py-3">{c.city}</td>
-              <td className="px-4 py-3">{c.country}</td>
-              <td className="px-4 py-3">{c.email}</td>
+    <div dir="rtl" className="overflow-x-auto bg-[#001c2f] px-4 mt-6">
+      <div className="max-w-[1200px] mx-auto">
+        <table className="w-full min-w-[900px] text-sm text-white border-separate border-spacing-y-2 border-spacing-x-2">
+          <thead>
+            <tr>
+              {headers.map(({ key, label }) => (
+                <th
+                  key={key}
+                  onClick={() => onSort?.(key)}
+                  className={getHeaderClasses(key)}
+                >
+                  <div className="flex items-center justify-end gap-1">
+                    {label}
+                    {renderSortIcon(key)}
+                  </div>
+                </th>
+              ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {customers.map((c) => (
+              <tr
+                key={c.id}
+                className="border-t border-[#1D3B5A] hover:bg-[#072243] transition"
+              >
+                <td className="px-4 py-3">{c.firstName}</td>
+                <td className="px-4 py-3">{c.lastName}</td>
+                <td className="px-4 py-3">{c.mobile}</td>
+                <td className="px-4 py-3">{c.city}</td>
+                <td className="px-4 py-3">{c.country}</td>
+                <td className="px-4 py-3">{c.email}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

@@ -45,7 +45,7 @@ export default function CustomersPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#031627]">
+    <div className="min-h-screen bg-[#001c2f]">
       <div className="w-full mx-auto">
         <CustomerHeader
           search={search}
