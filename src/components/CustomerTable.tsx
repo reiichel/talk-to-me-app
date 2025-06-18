@@ -1,9 +1,5 @@
-import {
-  ArrowDownWideNarrow,
-  ArrowUpWideNarrow,
-  Info,
-  CheckCircle,
-} from "lucide-react";
+// ✅ CustomerTable.tsx – RTL פיקסל פרפקט
+import { ArrowDownWideNarrow, ArrowUpWideNarrow, Info, CheckCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import type { Customer } from "@/models/customer";
 
@@ -12,9 +8,6 @@ interface Props {
   sortField?: keyof Customer;
   sortDirection?: "asc" | "desc";
   onSort?: (field: keyof Customer) => void;
-  currentPage?: number;
-  onPageChange?: (page: number) => void;
-  pageSize?: number;
 }
 
 export default function CustomerTable({
@@ -35,7 +28,7 @@ export default function CustomerTable({
   ];
 
   const getHeaderClasses = (key: keyof Customer) =>
-    `px-4 py-3 text-sm text-right cursor-pointer select-none transition-all ${
+    `px-4 py-3 text-sm text-right cursor-pointer select-none transition-all whitespace-nowrap ${
       sortField === key
         ? "bg-[#0797FF] text-white rounded-full font-semibold"
         : "text-white hover:text-blue-300"
@@ -50,7 +43,7 @@ export default function CustomerTable({
     ));
 
   return (
-    <div className="overflow-x-auto w-full mt-6 rounded-xl shadow-inner bg-[#0F2C3F]">
+    <div dir="rtl" className="overflow-x-auto w-full shadow-inner bg-[#0F2C3F]">
       <table className="w-full text-sm text-right text-white min-w-[900px]">
         <thead>
           <tr>
@@ -60,8 +53,10 @@ export default function CustomerTable({
                 onClick={() => onSort?.(key)}
                 className={getHeaderClasses(key)}
               >
-                {label}
-                {renderSortIcon(key)}
+                <div className="flex items-center justify-center gap-1">
+                  {label}
+                  {renderSortIcon(key)}
+                </div>
               </th>
             ))}
           </tr>

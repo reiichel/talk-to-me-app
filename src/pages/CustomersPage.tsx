@@ -45,8 +45,8 @@ export default function CustomersPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#031627] p-4">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-[#031627]">
+      <div className="w-full mx-auto">
         <CustomerHeader
           search={search}
           onSearchChange={setSearch}
@@ -58,9 +58,9 @@ export default function CustomersPage() {
           sortField={sortField}
           sortDirection={sortDirection}
           onSort={handleSort}
-          currentPage={page}
-          onPageChange={setPage}
-          pageSize={limit}
+          // currentPage={page}
+          // onPageChange={setPage}
+          // pageSize={limit}
         />
       </div>
     </div>
