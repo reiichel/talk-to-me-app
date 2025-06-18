@@ -145,7 +145,7 @@ export default function CustomerHeader({
         className="absolute bottom-0 right-0 aspect-square pointer-events-none z-[-1]"
         style={{
           height: "50%",
-          background: "linear-gradient(135deg, #193345 0%, #1c5e8c 100%)",
+          background: "linear-gradient(135deg, #193345 0%, blurHighlight 100%)",
           filter: "blur(20px)",
         }}
       />
