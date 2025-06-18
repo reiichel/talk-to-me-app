@@ -4,36 +4,36 @@ import type { LoginRequest, LoginResponse } from '@/models/auth';
 import type { ApiErrorResponse } from '@/models/api';
 
 export async function login(data: LoginRequest): Promise<LoginResponse> {
-  // const res = await fetch(LOGIN_URL, {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify(data),
-  // });
+  const res = await fetch(LOGIN_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
 
-  // const text = await res.text();
-  // let json: LoginResponse | ApiErrorResponse;
+  const text = await res.text();
+  let json: LoginResponse | ApiErrorResponse;
 
-  // try {
-  //   json = JSON.parse(text);
-  // } catch {
-  //   throw new Error('Invalid server response');
-  // }
-
-  // if (!res.ok) {
-  //   const errorData = json as ApiErrorResponse;
-  //   throw new Error(errorData.message || 'Login failed');
-  // }
-let json = {
-  token: "asfdadsdsad",
-  user: {
-    username: "string",
-  firstName: "string",
-  lastName: "string",
-  email: "string",
-  roles: [""],
-  isActive: true
+  try {
+    json = JSON.parse(text);
+  } catch {
+    throw new Error('Invalid server response');
   }
-};
+
+  if (!res.ok) {
+    const errorData = json as ApiErrorResponse;
+    throw new Error(errorData.message || 'Login failed');
+  }
+// let json = {
+//   token: "asfdadsdsad",
+//   user: {
+//     username: "string",
+//   firstName: "string",
+//   lastName: "string",
+//   email: "string",
+//   roles: [""],
+//   isActive: true
+//   }
+// };
   const result = json as LoginResponse;
 
   saveToken(result.token);

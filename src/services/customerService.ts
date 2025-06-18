@@ -1,5 +1,3 @@
-
-
 import { fetchWithAuth } from "@/lib/fetchWithAuth";
 import { CUSTOMERS_URL } from "@/config/endpoints";
 import type { Customer, CustomerRequest, CustomersResponse, SearchCustomerResponse } from "@/models/customer";

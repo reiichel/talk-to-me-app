@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import type { RootState } from '@/store';
-import { useAuthInit } from '@/hooks/useAuth'; // ← או איפה שזה נמצא
+import { useAuthInit } from '@/hooks/useAuth';
 
 export default function AuthGuard({ children }: { children: React.ReactNode }) {
   const isReady = useAuthInit();
