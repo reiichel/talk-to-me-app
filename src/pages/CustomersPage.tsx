@@ -16,7 +16,7 @@ export default function CustomersPage() {
 
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
-  const limit = 10;
+  const limit = 1000;
   const [sortField, setSortField] = useState<keyof Customer>("lastName");
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
 
@@ -58,9 +58,9 @@ export default function CustomersPage() {
           sortField={sortField}
           sortDirection={sortDirection}
           onSort={handleSort}
-          // currentPage={page}
-          // onPageChange={setPage}
-          // pageSize={limit}
+          currentPage={page}
+          onPageChange={setPage}
+          pageSize={limit}
         />
       </div>
     </div>

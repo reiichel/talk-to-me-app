@@ -35,17 +35,14 @@ export default function CustomerHeader({
           <div className="flex items-center justify-between">
             {isMobile ? (
               <>
-                {/* חץ חזור */}
                 <button onClick={back} className="text-white">
                   <ChevronRight size={24} />
                 </button>
 
-                {/* כותרת */}
                 <h1 className="text-white text-base font-bold text-right flex-1">
                   {t("customers.title")}
                 </h1>
 
-                {/* כפתורים */}
                 <div className="flex gap-2">
                   <button
                     onClick={() => setMobileSearchOpen(true)}
@@ -77,12 +74,10 @@ export default function CustomerHeader({
 
         {mobileSearchOpen && isMobile && (
           <div className="flex items-center gap-2 w-full">
-            {/* חץ סגירה */}
             <button onClick={closeSearch} className="text-white">
               <ChevronRight size={24} />
             </button>
 
-            {/* שדה חיפוש */}
             <div className="relative flex-1">
               <Search
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-white"
@@ -102,7 +97,6 @@ export default function CustomerHeader({
               />
             </div>
 
-            {/* כפתור פילטר */}
             <button
               onClick={onFilterClick}
               className="w-10 h-10 bg-white/10 text-white rounded-full flex items-center justify-center"
@@ -114,7 +108,6 @@ export default function CustomerHeader({
 
         {!isMobile && (
           <div className="flex items-center justify-between gap-4">
-            {/* שדה חיפוש */}
             <div className="relative w-full h-[48px] max-w-[80%]">
               <Search
                 className="absolute left-4 top-1/2 -translate-y-1/2 text-white"
@@ -129,7 +122,6 @@ export default function CustomerHeader({
               />
             </div>
 
-            {/* כפתורים */}
             <div className="flex items-center gap-3 max-w-[20%]">
               <button
                 onClick={onFilterClick}
@@ -149,7 +141,6 @@ export default function CustomerHeader({
         )}
       </div>
 
-      {/* כתם רקע */}
       <div
         className="absolute bottom-0 right-0 aspect-square pointer-events-none z-[-1]"
         style={{
