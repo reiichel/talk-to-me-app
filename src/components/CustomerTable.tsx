@@ -35,7 +35,7 @@ export default function CustomerTable({
   const getHeaderClasses = (key: keyof Customer) => {
     const isSorted = sortField === key;
     return `
-      px-4 py-3 text-sm text-right cursor-pointer select-none whitespace-nowrap transition-all rounded-[14px]
+      px-4 py-3 text-sm text-right cursor-pointer select-none whitespace-nowrap transition-all rounded-card
       ${isSorted
         ? "bg-accent text-white font-semibold"
         : "bg-surface text-white/80 hover:text-white"}
@@ -52,12 +52,9 @@ export default function CustomerTable({
 
   return (
     <div dir="rtl" className="overflow-x-auto bg-primary px-4 mt-6">
-      <div className="max-w-[1200px] mx-auto">
+      <div className="max-w-container mx-auto">
         <div
-          className={`
-            rounded-md relative overflow-y-auto
-            max-h-[calc(100vh-20px)] md:max-h-[calc(100vh-200px)]
-          `}
+          className="rounded-md relative overflow-y-auto max-h-[calc(100vh-20px)] md:max-h-[calc(100vh-200px)]"
           style={{
             scrollbarWidth: "none",
             msOverflowStyle: "none",
