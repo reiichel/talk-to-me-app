@@ -1,14 +1,8 @@
-/**
- * הערה: כרגע הנתונים נשלפים מקובץ דמה (Fake Data)
- * כדי לחזור לשליפה אמיתית מהשרת, בטל את השימוש ב־CUSTOMERS_MOCK
- * והפעל מחדש את useQuery עם getCustomers.
- */
-
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import CustomerTable from "@/components/CustomerTable";
 import CustomerHeader from "@/components/CustomerHeader";
-import { mockCustomers } from "@/mock/mockCustomers";
+import { getCustomers } from "@/services/customerService";
 import type { Customer } from "@/models/customer";
 
 export default function CustomersPage() {
@@ -16,24 +10,33 @@ export default function CustomersPage() {
 
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
-  const limit = 1000;
+  const [limit] = useState(10); // החלפת 1000 לגודל עמוד אמיתי
   const [sortField, setSortField] = useState<keyof Customer>("lastName");
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
 
-  const filteredData = useMemo(() => {
-    const lowerSearch = search.toLowerCase();
-    return mockCustomers.filter(
-      (c) =>
-        c.firstName.toLowerCase().includes(lowerSearch) ||
-        c.lastName.toLowerCase().includes(lowerSearch)
-    ).sort((a, b) => {
-      const aVal = a[sortField] ?? "";
-      const bVal = b[sortField] ?? "";
-      return sortDirection === "asc"
-        ? String(aVal).localeCompare(String(bVal))
-        : String(bVal).localeCompare(String(aVal));
-    });
-  }, [search, sortField, sortDirection]);
+  const [customers, setCustomers] = useState<Customer[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchCustomers = async () => {
+      setLoading(true);
+      try {
+        const data = await getCustomers({
+          page,
+          limit,
+          sort: sortField,
+          order: sortDirection,
+        });
+        setCustomers(data);
+      } catch (err) {
+        console.error("שגיאה בטעינת לקוחות:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCustomers();
+  }, [page, limit, sortField, sortDirection]);
 
   const handleSort = (field: keyof Customer) => {
     if (sortField === field) {
@@ -45,16 +48,16 @@ export default function CustomersPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#001c2f]">
-      <div className="w-full mx-auto">
-        <CustomerHeader
-          search={search}
-          onSearchChange={setSearch}
-          onAddCustomer={() => console.log("Add customer")}
-        />
+    <div className="h-full bg-[#001c2f] flex flex-col">
+      <CustomerHeader
+        search={search}
+        onSearchChange={setSearch}
+        onAddCustomer={() => console.log("Add customer")}
+      />
 
+      <div className="flex-grow overflow-hidden">
         <CustomerTable
-          customers={filteredData.slice((page - 1) * limit, page * limit)}
+          customers={customers}
           sortField={sortField}
           sortDirection={sortDirection}
           onSort={handleSort}

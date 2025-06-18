@@ -87,7 +87,7 @@ export default function CustomerTable({
               </tr>
             </thead>
             <tbody>
-              {customers.map((c) => (
+              {(customers ?? []).map((c) => (
                 <tr
                   key={c.id}
                   className="border-t border-[#1D3B5A] hover:bg-[#072243] transition"

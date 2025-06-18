@@ -4,7 +4,7 @@ import type { Customer, CustomerRequest, CustomersResponse, SearchCustomerRespon
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
 
-export async function getCustomers(req: CustomerRequest): Promise<CustomersResponse["data"]> {
+export async function getCustomers(req: CustomerRequest): Promise<Customer[]> {
   const query = new URLSearchParams({
     page: req.page.toString(),
     limit: req.limit.toString(),
@@ -12,11 +12,11 @@ export async function getCustomers(req: CustomerRequest): Promise<CustomersRespo
     order: req.order,
   });
 
-  const res = await fetchWithAuth(`${CUSTOMERS_URL}${query}`);
-  const json: CustomersResponse = await res.json();
-
-  return json.data;
+  const res = await fetchWithAuth(`${CUSTOMERS_URL}?${query}`);
+  const json: Customer[] = await res.json();
+  return json;
 }
+
 
 export async function searchCustomers(searchTerm: string): Promise<SearchCustomerResponse["data"]> {
   const query = new URLSearchParams({ searchTerm });
