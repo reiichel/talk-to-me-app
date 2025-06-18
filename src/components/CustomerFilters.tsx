@@ -35,7 +35,7 @@ export default function CustomerFilters({
             value={search}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder={t("customers.searchPlaceholder")}
-            className="w-full bg-[#0F2C3F] text-white rounded-xl py-2 pr-10 pl-4 focus:outline-none"
+            className="w-full bg-surface text-white rounded-xl py-2 pr-10 pl-4 focus:outline-none"
           />
         </div>
       </div>

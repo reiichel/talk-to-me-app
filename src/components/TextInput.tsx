@@ -38,7 +38,7 @@ export default function TextInput({
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
         className={`
-          w-full rounded-xl px-4 pt-5 pb-2 pr-10 text-white bg-[#0F2C3F] placeholder-transparent
+          w-full rounded-xl px-4 pt-5 pb-2 pr-10 text-white bg-surface placeholder-transparent
           focus:outline-none transition-all
           ${
             error
@@ -54,7 +54,7 @@ export default function TextInput({
     absolute right-4 transition-all text-gray-400 text-xs pointer-events-none 
     ${
       focused || hasValue
-        ? "top-[2px] px-1 bg-[#0F2C3F] z-[1]"
+        ? "top-[2px] px-1 bg-surface z-[1]"
         : "top-3.5 text-sm"
     }
     ${error ? "" : ""}

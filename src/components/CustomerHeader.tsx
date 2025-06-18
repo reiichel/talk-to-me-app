@@ -28,9 +28,9 @@ export default function CustomerHeader({
   return (
     <header
       dir="rtl"
-      className="relative w-full bg-[#193142] backdrop-blur-[100px] pt-[20px] pb-[20px] px-4"
+      className="relative w-full bg-header backdrop-blur-heavy pt-[20px] pb-[20px] px-header-px-mobile md:px-header-px"
     >
-      <div className="max-w-[1200px] mx-auto flex flex-col gap-4">
+      <div className="max-w-container mx-auto flex flex-col gap-4">
         {!mobileSearchOpen && (
           <div className="flex items-center justify-between">
             {isMobile ? (
@@ -131,7 +131,7 @@ export default function CustomerHeader({
               </button>
               <button
                 onClick={onAddCustomer}
-                className="flex flex-row-reverse items-center gap-2 bg-white text-[#031627] font-bold px-5 h-[50px] rounded-[20px] text-[18px]"
+                className="flex flex-row-reverse items-center gap-2 bg-white text-[#031627] font-bold px-5 h-[50px] rounded-button text-[18px]"
               >
                 <Plus size={18} />
                 {t("customers.new")}

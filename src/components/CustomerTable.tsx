@@ -37,8 +37,8 @@ export default function CustomerTable({
     return `
       px-4 py-3 text-sm text-right cursor-pointer select-none whitespace-nowrap transition-all rounded-[14px]
       ${isSorted
-        ? "bg-[#0797FF] text-white font-semibold"
-        : "bg-[#0F2C3F] text-white/80 hover:text-white"}
+        ? "bg-accent text-white font-semibold"
+        : "bg-surface text-white/80 hover:text-white"}
     `;
   };
 
@@ -51,7 +51,7 @@ export default function CustomerTable({
     ));
 
   return (
-    <div dir="rtl" className="overflow-x-auto bg-[#001c2f] px-4 mt-6">
+    <div dir="rtl" className="overflow-x-auto bg-primary px-4 mt-6">
       <div className="max-w-[1200px] mx-auto">
         <div
           className={`
@@ -70,7 +70,7 @@ export default function CustomerTable({
           `}</style>
 
           <table className="w-full min-w-[900px] text-sm text-white border-separate border-spacing-y-2 border-spacing-x-2">
-            <thead className="sticky top-0 bg-[#001c2f] z-10">
+            <thead className="sticky top-0 bg-primary z-10">
               <tr>
                 {headers.map(({ key, label }) => (
                   <th
@@ -109,7 +109,7 @@ export default function CustomerTable({
           {currentPage > 1 && (
             <button
               onClick={() => onPageChange(currentPage - 1)}
-              className="px-3 py-1 bg-[#0F2C3F] rounded hover:bg-[#1d3b5a]"
+              className="px-3 py-1 bg-surface rounded hover:bg-[#1d3b5a]"
             >
               הקודם
             </button>
@@ -118,7 +118,7 @@ export default function CustomerTable({
           {customers.length === pageSize && (
             <button
               onClick={() => onPageChange(currentPage + 1)}
-              className="px-3 py-1 bg-[#0F2C3F] rounded hover:bg-[#1d3b5a]"
+              className="px-3 py-1 bg-surface rounded hover:bg-[#1d3b5a]"
             >
               הבא
             </button>

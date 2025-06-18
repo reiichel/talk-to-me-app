@@ -22,7 +22,7 @@ export default function PrimaryButton({
       disabled={disabled || isLoading}
       className={`
         w-full flex items-center justify-center
-        bg-[#0797FF] text-white text-lg font-medium py-3 rounded-xl
+        bg-accent text-white text-lg font-medium py-3 rounded-xl
         transition 
         ${disabled || isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:opacity-90'}
       `}
