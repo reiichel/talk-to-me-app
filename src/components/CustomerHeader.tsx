@@ -1,4 +1,3 @@
-// ✅ CustomerHeader.tsx — גרסה מדויקת לפי הפיגמה שלך כולל רספונסיביות מלאה, גרדיאנט ורקע blur
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Plus, Search, ChevronRight, Filter, X } from "lucide-react";
@@ -26,19 +25,16 @@ export default function CustomerHeader({
   return (
     <header
       dir="rtl"
-      style={{ background: "#193142", backdropFilter: "blur(50px)" }}
-      className="pt-10 px-[60px] pb-[20px] flex flex-col gap-3 rounded-b-xl"
+      className="relative pt-[40px] px-[60px] pb-[20px] flex flex-col gap-4 bg-[#193142] backdrop-blur-[100px]"
     >
-      {/* שורת כותרת – דסקטופ או מובייל */}
       {!mobileSearchOpen && (
         <div className="flex items-center justify-between">
-          {/* מובייל – חץ + כותרת */}
           {isMobile ? (
             <>
               <button onClick={onBack} className="text-white">
                 <ChevronRight size={24} />
               </button>
-              <h1 className="text-white text-base font-bold text-center flex-1">
+              <h1 className="text-white text-base font-bold flex-1 text-center">
                 {t("customers.title")}
               </h1>
               <div className="flex gap-2">
@@ -58,21 +54,21 @@ export default function CustomerHeader({
             </>
           ) : (
             <div className="flex items-center justify-between w-full">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-4">
                 <div className="w-[50px] h-[50px] rounded-full bg-white/10"></div>
-                <h1 className="text-white text-[30px] font-bold leading-none">
+                <h1 className="text-white text-[30px] font-bold">
                   {t("customers.title")}
                 </h1>
               </div>
-              <img src="/logo.png" alt="logo" className="h-[45px] w-[47px]" />
+              <img src="/logo.png" alt="logo" className="w-[47px] h-[45px]" />
             </div>
           )}
         </div>
       )}
 
-      {/* שורת חיפוש — במובייל רק כשהחיפוש פתוח */}
+      {/* שורת חיפוש – מובייל */}
       {mobileSearchOpen && isMobile && (
-        <div className="relative flex items-center gap-2">
+        <div className="flex items-center gap-2">
           <button onClick={onBack} className="text-white">
             <ChevronRight size={24} />
           </button>
@@ -82,11 +78,11 @@ export default function CustomerHeader({
               size={16}
             />
             <input
-              className="w-full bg-[#00000033] text-white rounded-full py-2 pr-10 pl-8 placeholder-white text-sm"
               value={search}
               onChange={(e) => onSearchChange(e.target.value)}
               placeholder={t("customers.searchPlaceholder")}
               dir="rtl"
+              className="w-full bg-[#00000033] text-white rounded-full py-2 pr-10 pl-8 placeholder:text-white text-sm"
             />
             <X
               onClick={() => onSearchChange("")}
@@ -97,12 +93,12 @@ export default function CustomerHeader({
         </div>
       )}
 
-      {/* שורת פעולות – דסקטופ בלבד */}
+      {/* שורת פעולות – דסקטופ */}
       {!isMobile && (
         <div className="flex items-center justify-between gap-4">
-          <div className="relative w-full max-w-[80%] h-12">
+          <div className="relative w-full h-[48px] max-w-[80%]">
             <Search
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-white"
               size={18}
             />
             <input
@@ -110,10 +106,9 @@ export default function CustomerHeader({
               onChange={(e) => onSearchChange(e.target.value)}
               placeholder={t("customers.searchPlaceholder")}
               dir="rtl"
-              className="w-full h-full bg-[#00000033] text-white text-right rounded-full py-2 pr-4 pl-10 placeholder:text-[#FFFFFF] text-sm"
+              className="w-full h-full bg-[#00000033] text-white text-right rounded-full pr-4 pl-10 placeholder-white text-sm"
             />
           </div>
-
           <div className="flex items-center gap-3 max-w-[20%]">
             <button
               onClick={onFilterClick}
@@ -131,8 +126,15 @@ export default function CustomerHeader({
           </div>
         </div>
       )}
-      <div className="absolute bottom-0 right-0 w-32 h-64 bg-[#1b5984] opacity-40 blur-[100px] pointer-events-none z-0" />
-      <div className="absolute bottom-0 right-0 w-32 h-64 bg-[#1b5984] opacity-40 blur-[100px] pointer-events-none z-0" />
+
+      <div
+        className="absolute bottom-0 right-0 aspect-square pointer-events-none z-[-1]"
+        style={{
+          height: "50%",
+          background: "linear-gradient(135deg, #193345 0%, #1b5b89 100%)",
+          filter: "blur(20px)",
+        }}
+      />
     </header>
   );
 }
