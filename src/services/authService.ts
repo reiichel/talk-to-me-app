@@ -23,17 +23,7 @@ export async function login(data: LoginRequest): Promise<LoginResponse> {
     const errorData = json as ApiErrorResponse;
     throw new Error(errorData.message || 'Login failed');
   }
-// let json = {
-//   token: "asfdadsdsad",
-//   user: {
-//     username: "string",
-//   firstName: "string",
-//   lastName: "string",
-//   email: "string",
-//   roles: [""],
-//   isActive: true
-//   }
-// };
+  
   const result = json as LoginResponse;
 
   saveToken(result.token);
