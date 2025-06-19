@@ -48,7 +48,7 @@ export default function CustomersPage() {
   };
 
   return (
-    <div className="h-full bg-primary flex flex-col">
+    <div className="h-full bg-primary flex flex-col bg-primary">
       <CustomerHeader
         search={search}
         onSearchChange={setSearch}
