@@ -35,7 +35,7 @@ export default function CustomerTable({
   const getHeaderClasses = (key: keyof Customer) => {
     const isSorted = sortField === key;
     return `
-      px-4 py-3 text-sm text-right cursor-pointer select-none whitespace-nowrap transition-all rounded-card
+      px-4 py-3 text-sm text-right cursor-pointer select-none whitespace-nowrap transition-all rounded-card font-normal
       ${isSorted
         ? "bg-accent text-white"
         : "bg-surface text-white/80 hover:text-white"}
