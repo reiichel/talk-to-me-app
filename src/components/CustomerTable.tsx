@@ -37,7 +37,7 @@ export default function CustomerTable({
     return `
       px-4 py-3 text-sm text-right cursor-pointer select-none whitespace-nowrap transition-all rounded-card
       ${isSorted
-        ? "bg-accent text-white font-semibold"
+        ? "bg-accent text-white"
         : "bg-surface text-white/80 hover:text-white"}
     `;
   };
