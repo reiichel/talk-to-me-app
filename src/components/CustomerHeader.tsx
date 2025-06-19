@@ -140,15 +140,26 @@ export default function CustomerHeader({
           </div>
         )}
       </div>
-
-      <div
-        className="absolute bottom-0 right-0 aspect-square pointer-events-none z-[-1]"
-        style={{
-          height: "50%",
-          background: "linear-gradient(135deg, #193345 0%, #1c5e8c 100%)",
-          filter: "blur(20px)",
-        }}
-      />
+      {!isMobile && (
+        <div
+          className="absolute bottom-0 right-0 aspect-square pointer-events-none z-[-1]"
+          style={{
+            height: "60%",
+            background: "linear-gradient(135deg, #193345 0%, #1c5e8c 100%)",
+            filter: "blur(20px)",
+          }}
+        />
+      )}
+      {isMobile && (
+        <div
+          className="absolute bottom-0 right-0 aspect-square pointer-events-none z-[-1]"
+          style={{
+            height: "100%",
+            background: "linear-gradient(135deg, #193345 0%, #1c5e8c 100%)",
+            filter: "blur(20px)",
+          }}
+        />
+      )}
     </header>
   );
 }
