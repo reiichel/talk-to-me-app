@@ -30,6 +30,7 @@ export function useCustomers({ page, limit, sort, order }: UseCustomersProps) {
     customers: query.data ?? [],
     isLoading: query.isLoading,
     isError: query.isError,
+    isFetching: query.isFetching,
     error: query.error,
     refetch: query.refetch,
   };

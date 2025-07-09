@@ -31,7 +31,8 @@ export interface CustomersResponse {
 }
 
 export interface SearchCustomerResponse {
-  data: (Customer & {
-    matchedFields: string[];
-  })[];
+  data: {
+    result: (Customer & { matchedFields: string[] })[];
+    count: number;
+  };
 }

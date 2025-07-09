@@ -20,7 +20,9 @@ export default function CustomersPage() {
   const {
     customers: regularCustomers,
     isLoading: isListLoading,
+    isFetching: isListFetching,
     isError: isListError,
+    error: listError,
   } = useCustomers({
     page,
     limit,
@@ -31,12 +33,16 @@ export default function CustomersPage() {
   const {
     customers: searchedCustomers,
     isLoading: isSearchLoading,
+    isFetching: isSearchFetching,
     isError: isSearchError,
+    error: searchError,
   } = useSearchCustomers(search);
 
   const customers = isSearching ? searchedCustomers : regularCustomers;
   const isLoading = isSearching ? isSearchLoading : isListLoading;
+  const isFetching = isSearching ? isSearchFetching : isListFetching;
   const isError = isSearching ? isSearchError : isListError;
+  const error = isSearching ? searchError : listError;
 
   const handleSort = (field: keyof Customer) => {
     if (sortField === field) {
@@ -48,28 +54,43 @@ export default function CustomersPage() {
   };
 
   return (
-    <div className="h-full bg-primary flex flex-col bg-primary">
+    <div className="h-full bg-primary flex flex-col">
       <CustomerHeader
         search={search}
         onSearchChange={setSearch}
         onAddCustomer={() => console.log("Add customer")}
       />
 
-      <div className="flex-grow overflow-hidden">
-        {isError ? (
-          <p className="text-red-500 p-4">{t("customers.error")}</p>
-        ) : isLoading ? (
-          <p className="text-white p-4">{t("customers.loading")}</p>
-        ) : (
-          <CustomerTable
-            customers={customers}
-            sortField={sortField}
-            sortDirection={sortDirection}
-            onSort={handleSort}
-            currentPage={page}
-            onPageChange={setPage}
-            pageSize={limit}
-          />
+      <div className="flex-grow overflow-hidden relative">
+        {(
+          <>
+            <div className="relative min-h-[400px]">
+              <CustomerTable
+                customers={customers}
+                sortField={sortField}
+                sortDirection={sortDirection}
+                onSort={handleSort}
+                currentPage={page}
+                onPageChange={setPage}
+                pageSize={limit}
+              />
+              {isFetching && (
+                <div className="absolute inset-0 bg-black/5 flex items-center justify-center text-white text-sm z-10 pointer-events-none">
+                  {t("customers.loading")}
+                </div>
+              )}
+              {isError && (
+                <div className="absolute inset-0 bg-black/5 flex items-center justify-center text-white text-sm z-10 pointer-events-none">
+                  {t("customers.error")}
+                </div>
+              )}
+              {customers.length === 0 && !isFetching && (
+                <div className="absolute inset-0 bg-black/5 flex items-center justify-center text-white text-sm z-10 pointer-events-none">
+                  {t("customers.noResults")}
+                </div>
+              )}
+            </div>
+          </>
         )}
       </div>
     </div>
